@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enrollment Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Enrollment List</h1>
+
+    <!-- Error Message -->
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Success Message -->
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${success}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="d-flex justify-content-between mb-3">
+        <a th:href="@{/enrollments/new}" class="btn btn-primary">Add New Enrollment</a>
+    </div>
+    
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="enrollment : ${enrollments}">
+                <td th:text="${enrollment.id}"></td>
+                <td th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></td>
+                <td th:text="${enrollment.course.courseName}"></td>
+                <td th:text="${enrollment.grade}"></td>
+                <td>
+                    <a th:href="@{/enrollments/{id}(id=${enrollment.id})}" class="btn btn-sm btn-info me-1">View</a>
+                    <a th:href="@{/enrollments/edit/{id}(id=${enrollment.id})}" class="btn btn-sm btn-warning me-1">Edit</a>
+                    <a th:href="@{/enrollments/delete/{id}(id=${enrollment.id})}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

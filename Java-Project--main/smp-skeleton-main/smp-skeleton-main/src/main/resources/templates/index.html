@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .home-container {
+            min-height: calc(100vh - 56px);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+        .welcome-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .welcome-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .home-container {
+            padding: 20px;
+        }
+        .home-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 768px) {
+            .home-buttons {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        .card {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+        }
+        .card-header {
+            border-bottom: none;
+            font-weight: bold;
+            padding: 15px 20px;
+        }
+        .card-body {
+            text-align: center;
+            padding: 25px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-text {
+            margin-bottom: 20px;
+            color: #666;
+            flex-grow: 1;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="home-container">
+    <div class="welcome-section">
+        <h1>Welcome to Student Management Portal</h1>
+        <p>Follow the steps below to manage your educational system</p>
+    </div>
+
+    <div class="home-buttons">
+        <!-- Step 1: Foundation - Students -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-users me-2"></i>
+                    1. Manage Students
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="icon mb-3">
+                    <i class="fas fa-user-graduate fa-3x text-primary"></i>
+                </div>
+                <p class="card-text">Add, edit, and view student records with unique email validation</p>
+                <a th:href="@{/students}" class="btn btn-primary">Go to Students</a>
+            </div>
+        </div>
+
+        <!-- Step 2: Prerequisites - Courses -->
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-book me-2"></i>
+                    2. Manage Courses
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="icon mb-3">
+                    <i class="fas fa-chalkboard-teacher fa-3x text-success"></i>
+                </div>
+                <p class="card-text">Create and manage course offerings with descriptions</p>
+                <a th:href="@{/courses}" class="btn btn-success">Go to Courses</a>
+            </div>
+        </div>
+
+        <!-- Step 3: Core Functionality - Enrollments -->
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="fas fa-link me-2"></i>
+                    3. Manage Enrollments
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="icon mb-3">
+                    <i class="fas fa-clipboard-list fa-3x text-warning"></i>
+                </div>
+                <p class="card-text">Enroll students in courses and assign grades</p>
+                <a th:href="@{/enrollments}" class="btn btn-warning">Go to Enrollments</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

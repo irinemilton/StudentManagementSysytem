@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grading System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Grading System</h1>
+    
+    <div class="mb-3">
+        <label for="studentSelect" class="form-label">Select Student</label>
+        <select class="form-select" id="studentSelect" onchange="loadStudentEnrollments()">
+            <option value="">-- Select Student --</option>
+            <option th:each="student : ${students}" 
+                    th:value="${student.id}" 
+                    th:text="${student.firstName + ' ' + student.lastName}"></option>
+        </select>
+    </div>
+    
+    <div id="enrollmentsContainer" class="mt-4">
+        <!-- Student enrollments will be loaded here -->
+    </div>
+</div>
+
+<script>
+function loadStudentEnrollments() {
+    const studentId = document.getElementById('studentSelect').value;
+    if (!studentId) return;
+    
+    fetch(`/enrollments/student/${studentId}`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('enrollmentsContainer').innerHTML = html;
+        });
+}
+</script>
+</body>
+</html>

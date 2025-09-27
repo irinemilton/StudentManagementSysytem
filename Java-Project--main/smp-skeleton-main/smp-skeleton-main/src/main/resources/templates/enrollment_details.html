@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enrollment Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Enrollment Details</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Enrollment Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Student Details</h6>
+                    <p><strong>Name:</strong> <span th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${enrollment.student.email}"></span></p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Course Details</h6>
+                    <p><strong>Course:</strong> <span th:text="${enrollment.course.courseName}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${enrollment.course.description}"></span></p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h6>Grade Information</h6>
+                    <p><strong>Grade:</strong>
+                        <span th:if="${enrollment.grade != null and !enrollment.grade.isEmpty()}"
+                              th:text="${enrollment.grade}"
+                              class="badge bg-primary ms-2"></span>
+                        <span th:if="${enrollment.grade == null or enrollment.grade.isEmpty()}"
+                              class="text-muted ms-2">Not graded yet</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a th:href="@{/enrollments/edit/{id}(id=${enrollment.id})}" class="btn btn-primary">Edit Enrollment</a>
+            <a th:href="@{/enrollments}" class="btn btn-secondary">Back to Enrollments</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

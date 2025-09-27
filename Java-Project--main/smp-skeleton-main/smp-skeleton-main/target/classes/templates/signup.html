@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup - Student Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #ff9a9e, #fad0c4); height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .card { border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+<div class="card p-4 col-md-4">
+    <h3 class="text-center mb-4">Sign Up</h3>
+    <form th:action="@{/register}" method="post">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Choose a username" required />
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Choose a password" required />
+        </div>
+        <div class="mb-3">
+            <select class="form-control" name="role" required>
+                <option value="">-- Select Role --</option>
+                <option value="ROLE_USER">User</option>
+                <option value="ROLE_ADMIN">Admin</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Register</button>
+    </form>
+    <p class="text-center mt-3">Already have an account? <a th:href="@{/login}">Login</a></p>
+</div>
+</body>
+</html>
